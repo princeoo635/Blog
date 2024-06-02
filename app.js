@@ -2,6 +2,7 @@ require("dotenv").config();
 const express=require('express');
 const serverless = require("serverless-http");
 const path=require('path');
+const router = express.Router();
 const mongoose=require('mongoose');
 const userRouter=require('./routes/user');
 const blogRouter=require('./routes/blog');
@@ -27,7 +28,6 @@ app.use(express.static(path.resolve("./public")))
 
 app.get('/',async(req,res)=>{
     const allBlogs = await Blog.find({});
-    console.log(allBlogs)
     return res.render("home",{
         user:req.user,
         blogs:allBlogs,
